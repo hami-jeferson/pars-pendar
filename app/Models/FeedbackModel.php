@@ -6,10 +6,10 @@ use App\Enum\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostModel extends Model
+class FeedbackModel extends Model
 {
     use HasFactory;
-    protected $table = Table::POST->value;
+    protected $table = Table::FEEDBACK->value;
 
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['user_id', 'post_id', 'action'];
 }
