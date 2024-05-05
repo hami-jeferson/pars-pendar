@@ -26,7 +26,7 @@ class SignupService{
         $user = $this->userRepository->create($userDto);
         $token = $this->authRepository->createToken($user);
 
-        return ['user'=>new UserResource($user), 'token'=>$token];
+        return ['user'=>new UserResource($user), 'token'=>$token]; 
 
     }
 }
