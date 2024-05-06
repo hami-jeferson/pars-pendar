@@ -49,7 +49,7 @@ class UserDTO{
     protected function validate($email, $password)
     {
         $rules = [
-            'email' => 'required|email:rfc,dns'
+            'email' => 'required|email:rfc'
         ];
 
         if ($this->validateUnique) {

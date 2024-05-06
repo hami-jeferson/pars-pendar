@@ -11,7 +11,8 @@ class UserRepository implements UserRepositoryInterface {
     {
         return User::Create(['name'=>$data->getName(),
                              'email'=>$data->getEmail(),
-                             'password'=>$data->getPassword()]);
+                             'password'=>$data->getPassword(),
+                             'type'=>$data->getType()]);
     }
 
     public function findByEmail(string $email): User|null
