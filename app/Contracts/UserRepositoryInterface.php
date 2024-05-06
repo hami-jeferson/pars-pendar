@@ -7,7 +7,7 @@ use App\Models\User;
 interface UserRepositoryInterface{
     public function create(UserDTO $data): User;
 
-    public function findByEmail(string $email): User|false;
+    public function findByEmail(string $email): User|null;
 
     public function passwordMatch(User $user, string $password): bool;
 }

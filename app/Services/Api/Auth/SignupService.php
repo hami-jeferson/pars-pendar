@@ -1,12 +1,12 @@
 <?php
-namespace App\Services\Auth;
+namespace App\Services\Api\Auth;
 
 use App\Contracts\AuthRepositoryInterface;
+use App\Contracts\UserRepositoryInterface;
 use App\DTOs\UserDTO;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Http\Request;
-use App\Contracts\UserRepositoryInterface;
+
 class SignupService{
     private $userRepository;
     private $authRepository;

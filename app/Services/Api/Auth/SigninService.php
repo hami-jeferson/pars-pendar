@@ -1,13 +1,14 @@
 <?php
-namespace App\Services\Auth;
+namespace App\Services\Api\Auth;
 
 use App\Contracts\AuthRepositoryInterface;
+use App\Contracts\UserRepositoryInterface;
 use App\DTOs\UserDTO;
 use App\Http\Resources\UserResource;
+use App\Traits\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Contracts\UserRepositoryInterface;
-use App\Traits\Response;
+
 class SigninService{
     use Response;
     private $userRepository;

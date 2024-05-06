@@ -14,7 +14,7 @@ class UserRepository implements UserRepositoryInterface {
                              'password'=>$data->getPassword()]);
     }
 
-    public function findByEmail(string $email): User|false
+    public function findByEmail(string $email): User|null
     {
         return User::Email($email)->first();
     }

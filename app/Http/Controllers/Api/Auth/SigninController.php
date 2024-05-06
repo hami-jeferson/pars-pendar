@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Services\Auth\SigninService;
+use App\Services\Api\Auth\SigninService;
+use App\Traits\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Traits\Response;
+
 class SigninController extends Controller
 {
     use Response;
