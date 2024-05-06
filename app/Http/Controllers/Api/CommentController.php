@@ -28,7 +28,7 @@ class CommentController extends Controller
      */
     public function store(Request $request, string $slug): JsonResponse
     {
-        $this->commentService->addComment($request, $postId);
+        $this->commentService->addComment($request, $slug);
     }
 
     /**

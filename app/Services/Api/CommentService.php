@@ -15,9 +15,9 @@ class CommentService{
         $this->commentRepository = $commentRepository;
     }
 
-    public function addComment(Request $request, slug $slug)
+    public function addComment(Request $request, string $slug)
     {
         $commentDTO = new CommentDTO(rate: $request->get('rate'), comment: $request->get('comment'));
-        $this->commentRepository->add(Auth::user(), $commentDTO, $postId);
+        $this->commentRepository->add(Auth::user(), $commentDTO, $slug);
     }
 }
