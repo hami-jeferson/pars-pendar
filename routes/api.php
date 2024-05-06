@@ -19,6 +19,13 @@ Route::group(['middleware'=>['auth:sanctum', 'can_edit_comment'], 'prefix'=>'/co
     Route::delete('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'destroy']);
 });
 
+# Feedback controller
+Route::apiResource('post/{post}/feedback',\App\Http\Controllers\Api\FeedbackController::class)->middleware('auth:sanctum')->except(['update', 'destroy', 'index']);
+Route::apiResource('post/{post}/feedback',\App\Http\Controllers\Api\FeedbackController::class)->only(['index']);
+Route::group(['middleware'=>['auth:sanctum', 'can_edit_feedback'], 'prefix'=>'/feedback'], function(){
+    Route::put('/{feedback}', [\App\Http\Controllers\Api\FeedbackController::class, 'update']);
+    Route::delete('/{feedback}', [\App\Http\Controllers\Api\FeedbackController::class, 'destroy']);
+});
 
 Route::get('/user', function (Request $request) {
     return $request->user();

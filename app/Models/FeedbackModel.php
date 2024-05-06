@@ -12,4 +12,9 @@ class FeedbackModel extends Model
     protected $table = Table::FEEDBACK->value;
 
     protected $fillable = ['user_id', 'post_id', 'action'];
+
+    public function scopeUserId($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
 }

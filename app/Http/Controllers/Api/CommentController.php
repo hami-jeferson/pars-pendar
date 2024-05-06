@@ -47,7 +47,7 @@ class CommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage. 
+     * Remove the specified resource from storage.
      */
     public function destroy(CommentModel $commentModel)
     {

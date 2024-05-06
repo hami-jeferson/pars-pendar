@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\CommentModel;
+use App\Models\FeedbackModel;
 use App\Models\PostModel;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,10 @@ class RouteBindingProvider extends ServiceProvider
 
         Route::model('post', PostModel::class, function ($value) {
             abort(response()->json(['success' =>false, 'message'=> 'Post not found'], 404));
+        });
+
+        Route::model('feedback', FeedbackModel::class, function ($value) {
+            abort(response()->json(['success' =>false, 'message'=> 'Feedback not found'], 404));
         });
     }
 }

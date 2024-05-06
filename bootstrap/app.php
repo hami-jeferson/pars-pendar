@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'can_edit_comment'=> \App\Http\Middleware\CanEditComment::class
+            'can_edit_comment'=> \App\Http\Middleware\CanEditComment::class,
+            'can_edit_feedback'=> \App\Http\Middleware\CanEditFeedback::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

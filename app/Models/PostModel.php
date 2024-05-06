@@ -29,6 +29,11 @@ class PostModel extends Model
     {
         return $this->hasMany(CommentModel::class, 'post_id');
     }
+
+    public function feedback()
+    {
+        return $this->hasMany(FeedbackModel::class, 'post_id');
+    }
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
