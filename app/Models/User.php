@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $query->where('email', $email);
     }
 
+    public function post()
+    {
+        return $this->hasMany(PostModel::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
