@@ -12,7 +12,13 @@ Route::apiResource('post', \App\Http\Controllers\Api\PostController::class)->mid
 Route::apiResource('post', \App\Http\Controllers\Api\PostController::class)->only(['index', 'show']);
 
 # Comment controller
-Route::apiResource('post/{slug}/comment',\App\Http\Controllers\Api\CommentController::class);
+Route::apiResource('post/{post}/comment',\App\Http\Controllers\Api\CommentController::class)->middleware('auth:sanctum')->except(['update', 'destroy', 'index']);
+Route::apiResource('post/{post}/comment',\App\Http\Controllers\Api\CommentController::class)->only(['index']);
+Route::group(['middleware'=>['auth:sanctum', 'can_edit_comment'], 'prefix'=>'/comment'], function(){
+    Route::put('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'update']);
+    Route::delete('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'destroy']);
+});
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();

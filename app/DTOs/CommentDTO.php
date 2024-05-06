@@ -8,11 +8,13 @@ use Illuminate\Validation\ValidationException;
 class CommentDTO{
     private $rate;
     private $comment;
-    public function __construct(int $rate, string $comment = null)
+    private $userId;
+    public function __construct(int $rate = null, int $userId, string $comment = null)
     {
         $this->validate($rate);
         $this->rate = $rate;
         $this->comment = $comment;
+        $this->userId = $userId;
     }
 
     public function getRate()
@@ -25,6 +27,11 @@ class CommentDTO{
         return $this->comment;
     }
 
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
     protected function validate($rate)
     {
         $validator = Validator::make([
@@ -35,6 +42,7 @@ class CommentDTO{
 
         if ($validator->fails()) {
 //            throw ValidationException::withMessages($validator->errors()->toArray());
-            throw new ValidationException($validator, new JsonResponse(['success'=>false, 'message'=>$validator->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+            throw new ValidationException($validator, new JsonResponse(['success' => false, 'message' => $validator->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
         }
+    }
 }

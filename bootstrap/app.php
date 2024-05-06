@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'can_edit_comment'=> \App\Http\Middleware\CanEditComment::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
