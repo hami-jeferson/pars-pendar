@@ -21,16 +21,10 @@ class UserSeeder extends Seeder
 
         # create sample users
         for ($i = 0; $i < 5; $i++) {
-            User::factory()->create([
-                'password' => bcrypt('12345678'), // Use bcrypt to hash the password
-            ]);
+            $userDTO = new UserDTO(name: fake()->name(),
+                                   email:fake()->email(),
+                                   password: '12345678');
+            $userRepository->create($userDTO);
         }
-//        $sampleUser = ['user@example.com', 'user2@example.com', 'user3@example.com'];
-//        foreach($sampleUser as $user){
-//            $userDTO = new UserDTO(name: fake()->name(),
-//                                   email:$user ,
-//                                   password:12345678);
-//            $userRepository->create($userDTO);
-//        }
     }
 }
