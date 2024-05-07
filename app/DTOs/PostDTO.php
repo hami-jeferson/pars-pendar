@@ -8,6 +8,8 @@ use Illuminate\Validation\ValidationException;
 class PostDTO{
     private $title;
     private $content;
+
+    private $imageId;
     public function __construct(string $title = null, string $content = null)
     {
         $this->validate($title, $content);
@@ -25,6 +27,14 @@ class PostDTO{
         return $this->content;
     }
 
+    public function getImageId()
+    {
+        return $this->imageId;
+    }
+    public function setImageId(int $id)
+    {
+        $this->imageId = $id;
+    }
     protected function validate($title, $content)
     {
         $validator = Validator::make([

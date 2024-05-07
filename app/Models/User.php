@@ -28,6 +28,10 @@ class User extends Authenticatable
         return $query->where('email', $email);
     }
 
+    public function scopeAdmin($query)
+    {
+        return $query->where('type', 'admin');
+    }
     public function post()
     {
         return $this->hasMany(PostModel::class, 'user_id');

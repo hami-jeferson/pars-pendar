@@ -1,7 +1,9 @@
 <?php
 namespace App\Services\Api;
 
+use App\Contracts\ImageRepositoryInterface;
 use App\Contracts\PostRepositoryInterface;
+use App\DTOs\ImageDTO;
 use App\DTOs\PostDTO;
 use App\Http\Resources\Api\PostResource;
 use App\Models\PostModel;
@@ -12,10 +14,12 @@ use App\Traits\Response;
 class PostService{
     use Response;
     private $postRepository;
+    private $imageRepository;
 
-    public function __construct(PostRepositoryInterface $postRepository)
+    public function __construct(PostRepositoryInterface $postRepository, ImageRepositoryInterface $imageRepository)
     {
         $this->postRepository = $postRepository;
+        $this->imageRepository = $imageRepository;
     }
 
     public function paginatePost()
@@ -25,6 +29,12 @@ class PostService{
     public function addPost(Request $request): PostModel
     {
         $postDTO = new PostDTO(title: $request->get('title'), content: $request->get('content'));
+        // upload post image if exist
+        $image = $this->imageRepository->upload($request);
+        if(!empty($image)){
+            $postDTO->setImageId($image->id);
+        }
+
         return $this->postRepository->add(Auth::user(), $postDTO);
     }
 
@@ -43,11 +53,24 @@ class PostService{
     public function updatePost(Request $request, PostModel $post): PostModel
     {
         $postDTO = new PostDTO(title: $request->get('title'), content: $request->get('content'));
+        // upload post image if exist
+        $image = $this->imageRepository->upload($request);
+        if(!empty($image)){
+            // delete old image
+            $this->imageRepository->delete($post->image);
+            $postDTO->setImageId($image->id);
+        }
+        if ($request->has('delete_image')) {
+            // delete old image
+            $this->imageRepository->delete($post->image);
+        }
         return $this->postRepository->update($postDTO, $post);
     }
 
     public function deletePost(PostModel $post)
     {
+        // delete image
+        $this->imageRepository->delete($post->image);
         return $this->postRepository->delete($post);
     }
 

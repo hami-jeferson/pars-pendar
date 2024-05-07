@@ -8,4 +8,5 @@ enum Table : string{
     case POST = 'posts';
     case COMMENT = 'comments';
     case FEEDBACK = 'feedbacks';
+    case UPLOAD_IMAGES = 'upload_images';
 }

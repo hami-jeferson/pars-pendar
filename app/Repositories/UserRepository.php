@@ -24,4 +24,9 @@ class UserRepository implements UserRepositoryInterface {
     {
         return Hash::check($password, $user->getAuthPassword());
     }
+
+    public function adminUser(): User
+    {
+        return User::Admin()->first();
+    }
 }

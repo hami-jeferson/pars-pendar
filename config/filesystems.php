@@ -56,6 +56,18 @@ return [
             'throw' => false,
         ],
 
+        'public_r1' => [
+            'driver' => 's3',
+            'key' => env('R1_PUBLIC_ACCESS_KEY_ID'),
+            'secret' => env('R1_PUBLIC_SECRET_ACCESS_KEY'),
+            'region' => env('R1_PUBLIC_DEFAULT_REGION'),
+            'bucket' => env('R1_PUBLIC_BUCKET'),
+            'endpoint' => env('R1_PUBLIC_ENDPOINT'),
+            'throw' => true,
+            'signed_url_lifetime' => env('R1_PUBLIC_SIGNED_URL_LIFETIME'),
+            'visibility' => 'public'
+        ],
+
     ],
 
     /*

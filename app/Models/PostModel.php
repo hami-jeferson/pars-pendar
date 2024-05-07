@@ -13,7 +13,7 @@ class PostModel extends Model
     use HasFactory, HasPersianSlug;
     protected $table = Table::POST->value;
 
-    protected $fillable = ['title', 'content', 'user_id', 'slug'];
+    protected $fillable = ['title', 'content', 'user_id', 'slug', 'image_id'];
 
     public function scopePostId($query, $id)
     {
@@ -33,6 +33,11 @@ class PostModel extends Model
     public function feedback()
     {
         return $this->hasMany(FeedbackModel::class, 'post_id');
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(UploadImages::class, 'image_id');
     }
     public function getSlugOptions(): SlugOptions
     {
