@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+      - memcached
+  db:
+    image: sqlite:latest
+    volumes:
+      - ./database:/var/lib/sqlite
+  memcached:
+    image: memcached:latest
+    ports:
+      - "11211:11211"

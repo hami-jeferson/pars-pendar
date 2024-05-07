@@ -94,6 +94,7 @@ return array(
     'App\\Services\\Api\\Auth\\SignupService' => $baseDir . '/app/Services/Api/Auth/SignupService.php',
     'App\\Services\\Api\\CommentService' => $baseDir . '/app/Services/Api/CommentService.php',
     'App\\Services\\Api\\FeedbackService' => $baseDir . '/app/Services/Api/FeedbackService.php',
+    'App\\Services\\Api\\ImageService' => $baseDir . '/app/Services/Api/ImageService.php',
     'App\\Services\\Api\\PostService' => $baseDir . '/app/Services/Api/PostService.php',
     'App\\Traits\\Response' => $baseDir . '/app/Traits/Response.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

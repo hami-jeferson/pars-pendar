@@ -30,11 +30,12 @@ class PostService{
     {
         $postDTO = new PostDTO(title: $request->get('title'), content: $request->get('content'));
         // upload post image if exist
-        $image = $this->imageRepository->upload($request);
-        if(!empty($image)){
-            $postDTO->setImageId($image->id);
+        if($request->hasFile('image')){
+            $image = $this->imageRepository->upload($request);
+            if(!empty($image)){
+                $postDTO->setImageId($image->id);
+            }
         }
-
         return $this->postRepository->add(Auth::user(), $postDTO);
     }
 

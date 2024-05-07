@@ -654,6 +654,7 @@ class ComposerStaticInit8ac3c18e5f8813e90e8a1ec09f26c1c9
         'App\\Services\\Api\\Auth\\SignupService' => __DIR__ . '/../..' . '/app/Services/Api/Auth/SignupService.php',
         'App\\Services\\Api\\CommentService' => __DIR__ . '/../..' . '/app/Services/Api/CommentService.php',
         'App\\Services\\Api\\FeedbackService' => __DIR__ . '/../..' . '/app/Services/Api/FeedbackService.php',
+        'App\\Services\\Api\\ImageService' => __DIR__ . '/../..' . '/app/Services/Api/ImageService.php',
         'App\\Services\\Api\\PostService' => __DIR__ . '/../..' . '/app/Services/Api/PostService.php',
         'App\\Traits\\Response' => __DIR__ . '/../..' . '/app/Traits/Response.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

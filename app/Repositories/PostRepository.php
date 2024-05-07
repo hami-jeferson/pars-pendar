@@ -6,7 +6,7 @@ use App\DTOs\PostDTO;
 use App\Models\PostModel;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
-use PhpParser\Node\NullableType;
+use Illuminate\Support\Facades\Cache;
 
 class PostRepository implements PostRepositoryInterface {
     public function add(User $user, PostDTO $data): PostModel
@@ -17,7 +17,12 @@ class PostRepository implements PostRepositoryInterface {
 
     public function getBySlug(string $slug): PostModel|null
     {
-        return PostModel::where('slug', $slug)->first();
+        // Generate unique cache key based on slug
+        $cacheKey = "post_by_slug_{$slug}";
+        return Cache::remember($cacheKey, null, function () use ($slug) {
+            return PostModel::where('slug', $slug)->first();
+        });
+
     }
 
     public function update(PostDTO $data, PostModel $post): PostModel
