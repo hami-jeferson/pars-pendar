@@ -7,13 +7,16 @@ services:
     volumes:
       - .:/var/www/html
     depends_on:
-      - db
       - memcached
-  db:
-    image: sqlite:latest
-    volumes:
-      - ./database:/var/lib/sqlite
   memcached:
     image: memcached:latest
     ports:
       - "11211:11211"
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app

@@ -17,4 +17,9 @@ class FeedbackModel extends Model
     {
         return $query->where('user_id', $userId);
     }
+
+    public function scopeAction($query, $action)
+    {
+        return $this->where('action', $action);
+    }
 }

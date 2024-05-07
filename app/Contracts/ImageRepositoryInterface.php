@@ -9,5 +9,5 @@ use Illuminate\Http\UploadedFile;
 interface ImageRepositoryInterface{
     public function upload(File|UploadedFile $file, ImageDTO $data): UploadImages;
 
-    public function delete(UploadImages $images): void;
+    public function delete(UploadImages|null $images): void;
 }

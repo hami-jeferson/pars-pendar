@@ -6,6 +6,7 @@ use App\Contracts\PostRepositoryInterface;
 use App\DTOs\ImageDTO;
 use App\DTOs\PostDTO;
 use App\Http\Resources\Api\PostResource;
+use App\Http\Resources\PostDetailsResource;
 use App\Models\PostModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,9 +23,9 @@ class PostService{
         $this->imageRepository = $imageRepository;
     }
 
-    public function paginatePost()
+    public function paginatePost(Request $request)
     {
-        return $this->postRepository->paginate();
+        return $this->postRepository->paginate($request);
     }
     public function addPost(Request $request): PostModel
     {
@@ -39,16 +40,9 @@ class PostService{
         return $this->postRepository->add(Auth::user(), $postDTO);
     }
 
-    public function getPost(string $slug): JsonResponse
+    public function getPost(PostModel $post): JsonResponse
     {
-        $post = $this->postRepository->getBySlug($slug);
-        if(!empty($post)){
-            $res = $this->successResource(data: new PostResource($post));
-        }else{
-            $res = $this->error(msg: 'Post not found');
-        }
-
-        return $res;
+        return $this->successResource(data: new PostDetailsResource($post));
     }
 
     public function updatePost(Request $request, PostModel $post): PostModel

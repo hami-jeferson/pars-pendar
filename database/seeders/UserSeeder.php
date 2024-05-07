@@ -16,7 +16,12 @@ class UserSeeder extends Seeder
     {
         # create admin user
         $userRepository = new UserRepository();
-        $userDTO = new UserDTO(name: 'Hami Jeferson', email:'hami.sparow@gmail.com' , password:12345678 , type: 'admin');
+        $userDTO = new UserDTO(name: 'Hami Jeferson', email:'admin@gmail.com' , password:12345678 , type: 'admin');
+        $userRepository->create($userDTO);
+
+        # create author user
+        $userRepository = new UserRepository();
+        $userDTO = new UserDTO(name: 'Hami Jeferson', email:'hami.sparow@gmail.com' , password:12345678 , type: 'author');
         $userRepository->create($userDTO);
 
         # create sample users

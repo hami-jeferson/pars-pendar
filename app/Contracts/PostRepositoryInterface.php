@@ -4,6 +4,7 @@ namespace App\Contracts;
 use App\DTOs\PostDTO;
 use App\Models\PostModel;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface PostRepositoryInterface{
@@ -15,5 +16,5 @@ interface PostRepositoryInterface{
 
     public function getBySlug(string $slug): PostModel|null;
 
-    public function paginate(): LengthAwarePaginator;
+    public function paginate(Request $request): LengthAwarePaginator;
 }

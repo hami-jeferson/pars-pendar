@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'can_edit_comment'=> \App\Http\Middleware\CanEditComment::class,
             'can_edit_feedback'=> \App\Http\Middleware\CanEditFeedback::class,
+            'can_crud_post'=> \App\Http\Middleware\CanCRUDPost::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

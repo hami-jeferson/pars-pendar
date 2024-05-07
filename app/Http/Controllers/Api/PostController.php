@@ -22,9 +22,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return $this->paginateResponse(PostResource::collection($this->postService->paginatePost()));
+        return $this->paginateResponse(PostResource::collection($this->postService->paginatePost($request)));
     }
 
     /**
@@ -38,9 +38,9 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $slug): JsonResponse
+    public function show(PostModel $post): JsonResponse
     {
-        return $this->postService->getPost($slug);
+        return $this->postService->getPost($post);
     }
 
     /**

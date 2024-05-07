@@ -32,7 +32,7 @@ class ImageRepository implements ImageRepositoryInterface{
                                       'extension'=>$imageDTO->getExtension()]);
     }
 
-    public function delete(UploadImages $images): void
+    public function delete(UploadImages|null $images): void
     {
         if(!empty($images)) {
             $this->storage->delete($images->relative_url);

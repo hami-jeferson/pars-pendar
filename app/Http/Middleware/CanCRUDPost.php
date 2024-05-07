@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Traits\Response as TraitResponse;
-class CanEditComment
+class CanCRUDPost
 {
     use TraitResponse;
     /**
@@ -16,13 +16,12 @@ class CanEditComment
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //$commentRepository = new CommentRepository();
-        //$comment = $commentRepository->getById($request->route('comment'));
-        $comment = $request->route('comment');
-        if ($comment->user_id !== auth()->id()) {
-            return $this->error(msg: 'You are not owner of comment');
+        $post = $request->route('post');
+        if(auth()->user()->type == 'admin' or (empty($post) && auth()->user()->type == 'author') or (!empty($post) && $post->user_id = auth()->id())){
+            // every thing fine
+        }else{
+            return $this->error(msg: 'You have not access');
         }
-
         return $next($request);
     }
 }
