@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Repositories\PostRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 //use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class PostRepositoryTest extends TestCase
@@ -67,8 +68,9 @@ class PostRepositoryTest extends TestCase
     /** @test */
     public function it_can_paginate_posts()
     {
+        $request = new Request();
         PostModel::factory(10)->create();
-        $paginator = $this->postRepository->paginate();
+        $paginator = $this->postRepository->paginate($request);
 
         $this->assertInstanceOf(\Illuminate\Pagination\LengthAwarePaginator::class, $paginator);
         $this->assertEquals(10, $paginator->count());

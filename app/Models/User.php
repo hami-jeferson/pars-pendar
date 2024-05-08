@@ -37,6 +37,16 @@ class User extends Authenticatable
         return $this->hasMany(PostModel::class, 'user_id');
     }
 
+    public function comment()
+    {
+        return $this->hasMany(CommentModel::class, 'user_id');
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(FeedbackModel::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

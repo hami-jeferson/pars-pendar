@@ -1,17 +1,16 @@
 <?php
-namespace App\Services\Api;
+namespace App\Services;
 
 use App\Contracts\ImageRepositoryInterface;
 use App\Contracts\PostRepositoryInterface;
-use App\DTOs\ImageDTO;
 use App\DTOs\PostDTO;
-use App\Http\Resources\Api\PostResource;
 use App\Http\Resources\PostDetailsResource;
 use App\Models\PostModel;
+use App\Traits\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\Response;
+
 class PostService{
     use Response;
     private $postRepository;
@@ -31,11 +30,9 @@ class PostService{
     {
         $postDTO = new PostDTO(title: $request->get('title'), content: $request->get('content'));
         // upload post image if exist
-        if($request->hasFile('image')){
-            $image = $this->imageRepository->upload($request);
-            if(!empty($image)){
-                $postDTO->setImageId($image->id);
-            }
+        $image = $this->imageRepository->upload($request);
+        if(!empty($image)){
+            $postDTO->setImageId($image->id);
         }
         return $this->postRepository->add(Auth::user(), $postDTO);
     }
@@ -54,12 +51,18 @@ class PostService{
             // delete old image
             $this->imageRepository->delete($post->image);
             $postDTO->setImageId($image->id);
+        }else{
+            $postDTO->setImageId($post->image_id);
         }
-        if ($request->has('delete_image')) {
+        if ($request->has('delete_image') && $request->get('delete_image') == 1) {
             // delete old image
             $this->imageRepository->delete($post->image);
+            $postDTO->setImageId(null);
         }
-        return $this->postRepository->update($postDTO, $post);
+        $updatedPost = $this->postRepository->update($postDTO, $post);
+        $updatedPost->load('image');
+
+        return $updatedPost;
     }
 
     public function deletePost(PostModel $post)

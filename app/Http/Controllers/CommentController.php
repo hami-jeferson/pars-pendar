@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\CommentResource;
+use App\Http\Resources\CommentResource;
 use App\Models\CommentModel;
 use App\Models\PostModel;
-use App\Services\Api\CommentService;
+use App\Services\CommentService;
+use App\Traits\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Traits\Response;
 
 class CommentController extends Controller
 {

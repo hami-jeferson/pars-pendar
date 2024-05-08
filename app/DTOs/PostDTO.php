@@ -31,7 +31,7 @@ class PostDTO{
     {
         return $this->imageId;
     }
-    public function setImageId(int $id)
+    public function setImageId(int $id = null)
     {
         $this->imageId = $id;
     }

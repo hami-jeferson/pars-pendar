@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Api;
+namespace App\Services;
 
 use App\Contracts\FeedbackRepositoryInterface;
 use App\DTOs\FeedbackDTO;

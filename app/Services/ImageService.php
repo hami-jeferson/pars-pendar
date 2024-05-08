@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Api;
+namespace App\Services;
 
 use App\Contracts\ImageRepositoryInterface;
 use App\DTOs\ImageDTO;

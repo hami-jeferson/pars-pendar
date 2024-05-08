@@ -28,7 +28,7 @@ class PostRepository implements PostRepositoryInterface {
 
     public function update(PostDTO $data, PostModel $post): PostModel
     {
-        $post->update(['title'=>$data->getTitle(), 'content'=>$data->getContent()]);
+        $post->update(['title'=>$data->getTitle(), 'content'=>$data->getContent(), 'image_id'=>$data->getImageId()]);
         return $post;
     }
 

@@ -1,11 +1,10 @@
 <?php
-namespace App\Services\Api;
+namespace App\Services;
 
 use App\Contracts\CommentRepositoryInterface;
 use App\DTOs\CommentDTO;
 use App\Models\CommentModel;
 use App\Models\PostModel;
-use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

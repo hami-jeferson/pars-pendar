@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\PostResource;
+use App\Http\Resources\PostResource;
 use App\Models\PostModel;
-use App\Services\Api\PostService;
+use App\Services\PostService;
+use App\Traits\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Traits\Response;
 
 class PostController extends Controller
 {

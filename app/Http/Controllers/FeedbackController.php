@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\FeedbackResource;
+use App\Http\Resources\FeedbackResource;
 use App\Models\FeedbackModel;
 use App\Models\PostModel;
-use App\Services\Api\FeedbackService;
-use Illuminate\Http\Request;
+use App\Services\FeedbackService;
 use App\Traits\Response;
+use Illuminate\Http\Request;
+
 class FeedbackController extends Controller
 {
     use Response;

@@ -10,6 +10,8 @@ use App\Repositories\ImageRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class ImageRepositoryTest extends TestCase
@@ -29,10 +31,13 @@ class ImageRepositoryTest extends TestCase
     /** @test */
     public function it_can_upload_an_image()
     {
-        $file = new File(public_path('test_image.jpg')); // Replace 'test_image.jpg' with the path to your test image
-        $imageDTO = new ImageDTO('test_image.jpg', $file->getSize(), $file->getExtension());
+        $filePath = public_path('test_image.jpg'); // Replace 'test_image.jpg' with the path to your test image
 
-        $uploadedImage = $this->imageRepository->upload($file, $imageDTO);
+        $file = new UploadedFile($filePath, 'test_image.jpg', 'image/jpeg', null, true);
+        $request = new Request();
+        $request->files->add(['image' => $file]);
+
+        $uploadedImage = $this->imageRepository->upload($request);
 
         $this->assertInstanceOf(UploadImages::class, $uploadedImage);
         $this->assertEquals('test_image.jpg', $uploadedImage->file_name);
@@ -42,10 +47,13 @@ class ImageRepositoryTest extends TestCase
     /** @test */
     public function it_can_delete_an_image()
     {
-        $file = new File(public_path('test_image.jpg')); // Replace 'test_image.jpg' with the path to your test image
-        $imageDTO = new ImageDTO('test_image.jpg', '1024', 'jpg');
+        $filePath = public_path('test_image.jpg'); // Replace 'test_image.jpg' with the path to your test image
 
-        $uploadedImage = $this->imageRepository->upload($file, $imageDTO);
+        $file = new UploadedFile($filePath, 'test_image.jpg', 'image/jpeg', null, true);
+        $request = new Request();
+        $request->files->add(['image' => $file]);
+
+        $uploadedImage = $this->imageRepository->upload($request);
 
         $this->imageRepository->delete($uploadedImage);
 
